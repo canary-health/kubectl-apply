@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: eli-server
+  labels:
+    name: eli-server
+    tier: server
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 443
+      protocol: TCP
+      name: http
+  selector:
+    name: eli-server
+    tier: server
