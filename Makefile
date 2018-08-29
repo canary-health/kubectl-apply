@@ -4,14 +4,13 @@
 ## Internal variables
 ########################
 ORG_NAME=canary-health
-REPO_NAME=docker-kube-deploy
 APP_NAME=kubectl-apply
 AWS_REGION=us-east-1
 
 ########################
 ## External Variables
 ########################
-$(shell echo REPO_NAME=${REPO_NAME} > .env)
+$(shell echo APP_NAME=${APP_NAME} > .env)
 $(shell echo AWS_REGION=${AWS_REGION} >> .env)
 
 ########################
