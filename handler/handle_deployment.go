@@ -45,6 +45,15 @@ func (h *Handler) HandleDeployment(cmd *cobra.Command, args []string) {
 		if image != "" {
 			c.Image = image
 		}
+		// Set SecurityContext if nil
+		if c.SecurityContext == nil {
+			v1sc := v1.SecurityContext{
+				RunAsNonRoot:           setTrue(),
+				ReadOnlyRootFilesystem: setTrue(),
+			}
+			c.SecurityContext = &v1sc
+		}
+		c.ImagePullPolicy = v1.PullAlways
 		c.Env = envars
 		ncs = append(ncs, c)
 	}

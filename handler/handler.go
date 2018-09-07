@@ -22,3 +22,8 @@ func NewHandler(c *config.Config) *Handler {
 		Aws: newAwsSessionHandler(),
 	}
 }
+
+func setTrue() *bool {
+	t := true
+	return &t
+}

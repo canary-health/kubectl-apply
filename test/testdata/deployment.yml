@@ -1,23 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: eli-server
+  name: hellonode
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: eli-server
+      app: hellonode
       tier: server
   template:
     metadata:
       labels:
-        app: eli-server
+        app: hellonode
         tier: server
     spec:
       containers:
-        - name: eli-server
-          image:
-            872941275684.dkr.ecr.us-east-1.amazonaws.com/eli/server:acceptance
+        - name: hellonode
+          image: getintodevops/hellonode
           ports:
-            - containerPort: 443
+            - containerPort: 8000
               name: http-server
