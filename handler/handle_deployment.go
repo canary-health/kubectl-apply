@@ -58,7 +58,7 @@ func (h *Handler) HandleDeployment(cmd *cobra.Command, args []string) {
 		ncs = append(ncs, c)
 	}
 	deployment.Spec.Template.Spec.Containers = ncs
-	fmt.Println(deployment)
+	// fmt.Println(deployment)
 	// Applying deployment
 	fmt.Println("Applying deployment...")
 	result, err := deploymentsClient.Create(deployment)
