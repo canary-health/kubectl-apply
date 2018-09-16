@@ -27,3 +27,8 @@ func setTrue() *bool {
 	t := true
 	return &t
 }
+
+func ptrInt32(i int) *int32 {
+	i32 := int32(i)
+	return &i32
+}

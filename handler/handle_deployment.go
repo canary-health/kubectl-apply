@@ -25,6 +25,18 @@ func (h *Handler) HandleDeployment(cmd *cobra.Command, args []string) {
 	deployment := d.Obj.(*appsv1.Deployment)
 	// Set labels
 	deployment.Labels = labelHandler(cmd.Flag("labels").Value.String())
+	// Set default replicas per env
+	if deployment.Spec.Replicas == nil {
+		if namespace == "development" {
+			deployment.Spec.Replicas = ptrInt32(1)
+		}
+		if namespace == "accptance" {
+			deployment.Spec.Replicas = ptrInt32(2)
+		}
+		if namespace == "production" {
+			deployment.Spec.Replicas = ptrInt32(3)
+		}
+	}
 	// Set image if provided
 	var image string
 	if cmd.Flag("image").Value.String() != "" {
