@@ -11,10 +11,7 @@ import (
 // HandleService applies `Kind: Service`
 func (h *Handler) HandleService(cmd *cobra.Command, args []string) {
 	// Set Namespace
-	namespace := cmd.Flag("namespace").Value.String()
-	if namespace == "" {
-		namespace = v1.NamespaceDefault
-	}
+	namespace := setNamespace(cmd.Flag("namespace").Value.String())
 	// Handle kubeconfig file
 	kubeconfig := h.newKubeConfigHandler(cmd.Flag("kubeconfig").Value.String())
 	// Set Service Client

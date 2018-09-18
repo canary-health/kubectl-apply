@@ -11,10 +11,7 @@ import (
 // HandleDeployment applies `Kind: Deployment`
 func (h *Handler) HandleDeployment(cmd *cobra.Command, args []string) {
 	// Set Namespace
-	namespace := cmd.Flag("namespace").Value.String()
-	if namespace == "" {
-		namespace = "development"
-	}
+	namespace := setNamespace(cmd.Flag("namespace").Value.String())
 	// Handle kubeconfig file
 	kubeconfig := h.newKubeConfigHandler(cmd.Flag("kubeconfig").Value.String())
 	// Set Deployment Client
@@ -30,7 +27,7 @@ func (h *Handler) HandleDeployment(cmd *cobra.Command, args []string) {
 		if namespace == "development" {
 			deployment.Spec.Replicas = ptrInt32(1)
 		}
-		if namespace == "accptance" {
+		if namespace == "acceptance" {
 			deployment.Spec.Replicas = ptrInt32(2)
 		}
 		if namespace == "production" {
@@ -38,10 +35,7 @@ func (h *Handler) HandleDeployment(cmd *cobra.Command, args []string) {
 		}
 	}
 	// Set image if provided
-	var image string
-	if cmd.Flag("image").Value.String() != "" {
-		image = cmd.Flag("image").Value.String()
-	}
+	image := setImage(cmd.Flag("image").Value.String())
 	// Set env params
 	var paramPath string
 	if cmd.Flag("paramPath").Value.String() != "" {
@@ -54,9 +48,7 @@ func (h *Handler) HandleDeployment(cmd *cobra.Command, args []string) {
 	var ncs []v1.Container
 	// Range Containers and set env vars
 	for _, c := range cs {
-		if image != "" {
-			c.Image = image
-		}
+		c.Image = image
 		// Set SecurityContext if nil
 		if c.SecurityContext == nil {
 			v1sc := v1.SecurityContext{
@@ -70,7 +62,7 @@ func (h *Handler) HandleDeployment(cmd *cobra.Command, args []string) {
 		ncs = append(ncs, c)
 	}
 	deployment.Spec.Template.Spec.Containers = ncs
-	// fmt.Println(deployment)
+	fmt.Println(deployment)
 	// Applying deployment
 	fmt.Println("Applying deployment...")
 	result, err := deploymentsClient.Create(deployment)

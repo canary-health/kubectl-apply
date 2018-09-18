@@ -21,7 +21,7 @@ func newDecoderHandler(file string) *decoderHandler {
 	decode := scheme.Codecs.UniversalDeserializer().Decode
 	obj, _, err := decode([]byte(dat), nil, nil)
 	if err != nil {
-		fmt.Printf("%#v", err)
+		fmt.Printf("Got error on decode %#v", err)
 	}
 	return &decoderHandler{obj}
 }

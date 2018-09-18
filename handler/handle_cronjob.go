@@ -5,16 +5,12 @@ import (
 
 	"github.com/spf13/cobra"
 	v1beta1 "k8s.io/api/batch/v1beta1"
-	v1 "k8s.io/api/core/v1"
 )
 
 // HandleCronJob applies `Kind: CronJob`
 func (h *Handler) HandleCronJob(cmd *cobra.Command, args []string) {
 	// Set Namespace
-	namespace := cmd.Flag("namespace").Value.String()
-	if namespace == "" {
-		namespace = v1.NamespaceDefault
-	}
+	namespace := setNamespace(cmd.Flag("namespace").Value.String())
 	// Handle kubeconfig file
 	kubeconfig := h.newKubeConfigHandler(cmd.Flag("kubeconfig").Value.String())
 	// Set CronJob Client
