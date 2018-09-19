@@ -57,6 +57,7 @@ func Execute() {
 
 func init() {
 	cobra.OnInitialize(initConfig)
+	rootCmd.Version = "1.0.9"
 
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
@@ -68,7 +69,6 @@ func init() {
 	// rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
 	rootCmd.PersistentFlags().StringVarP(&kubeconfig, "kubeconfig", "k", "", "kubeconfig file (default is $KUBECONFIG set in build container or $HOME/.kube/config)")
-	// rootCmd.MarkFlagRequired("kubeconfig")
 
 	rootCmd.PersistentFlags().StringVarP(&file, "file", "f", "", "absolute path to deployment file")
 	rootCmd.MarkFlagRequired("file")
