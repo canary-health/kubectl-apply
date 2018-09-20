@@ -1,10 +1,13 @@
 package handler
 
-import "os"
+import (
+	"fmt"
+	"os"
+)
 
 func setNamespace(nsFlag string) string {
 	var namespace string
-	if nsFlag == "" {
+	if nsFlag == "" && os.Getenv("TAG") != "" {
 		// if passed flag not set try the var $TAG from build
 		namespace = os.Getenv("TAG")
 	}
@@ -12,5 +15,6 @@ func setNamespace(nsFlag string) string {
 	if namespace == "" {
 		namespace = "development"
 	}
+	fmt.Println("Setting namespace:", namespace)
 	return namespace
 }

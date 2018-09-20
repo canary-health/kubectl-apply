@@ -28,7 +28,7 @@ func newAwsSessionHandler() *awsSessHandler {
 }
 
 func (s *awsSessHandler) kmsDecrypt(file string) string {
-	fmt.Println("Decrypting kubeconfig file:", file)
+	fmt.Println("Using kubeconfig file:", file)
 
 	// Create KMS service client
 	svc := kms.New(s.Sess)

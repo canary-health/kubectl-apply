@@ -9,7 +9,7 @@ import (
 func labelHandler(labelsFlag string) map[string]string {
 	if labelsFlag == "" && os.Getenv("CODEBUILD_RESOLVED_SOURCE_VERSION") != "" {
 		out := make(map[string]string, 1)
-		value := fmt.Sprintf("%v", os.Getenv("CODEBUILD_RESOLVED_SOURCE_VERSION")[0:8])
+		value := fmt.Sprintf("v.%v", os.Getenv("CODEBUILD_RESOLVED_SOURCE_VERSION")[0:8])
 		out["build"] = value
 		return out
 	}
@@ -27,5 +27,6 @@ func labelHandler(labelsFlag string) map[string]string {
 		}
 		out[kv[0]] = kv[1]
 	}
+	fmt.Println("Setting labels: ", out)
 	return out
 }
