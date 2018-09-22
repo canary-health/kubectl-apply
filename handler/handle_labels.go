@@ -11,11 +11,13 @@ func labelHandler(labelsFlag string) map[string]string {
 		out := make(map[string]string, 1)
 		value := fmt.Sprintf("v.%v", os.Getenv("CODEBUILD_RESOLVED_SOURCE_VERSION")[0:8])
 		out["build"] = value
+		fmt.Println("Setting labels: ", out)
 		return out
 	}
 	if labelsFlag == "" && os.Getenv("CODEBUILD_RESOLVED_SOURCE_VERSION") == "" {
 		out := make(map[string]string, 1)
 		out["build"] = "unavailable"
+		fmt.Println("Setting labels: ", out)
 		return out
 	}
 	ss := strings.Split(labelsFlag, ",")

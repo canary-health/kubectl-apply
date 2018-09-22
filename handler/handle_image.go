@@ -1,6 +1,9 @@
 package handler
 
-import "os"
+import (
+	"fmt"
+	"os"
+)
 
 func setImage(imageFlag string) string {
 	var image string
@@ -10,5 +13,6 @@ func setImage(imageFlag string) string {
 	if image == ":" {
 		panic("Image can not be empty try setting one using --image")
 	}
+	fmt.Println("Using image:", image)
 	return image
 }

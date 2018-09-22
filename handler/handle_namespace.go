@@ -7,7 +7,7 @@ import (
 
 func setNamespace(nsFlag string) string {
 	var namespace string
-	if nsFlag == "" && os.Getenv("TAG") != "" {
+	if nsFlag == "" {
 		// if passed flag not set try the var $TAG from build
 		namespace = os.Getenv("TAG")
 	}
