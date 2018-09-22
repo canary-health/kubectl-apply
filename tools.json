@@ -63,6 +63,10 @@
     {
       "Repository": "github.com/aws/aws-sdk-go/service/ssm",
       "Commit": "a6bd27d9fae7ac3689e637d7725687e6c45d4a33"
+    },
+    {
+      "Repository": "github.com/canary-health/gotils/pkg/env",
+      "Commit": "68bb8234f3c9270258f1e3011becb539e8746e26"
     }
   ],
   "RetoolVersion": "1.3.7"

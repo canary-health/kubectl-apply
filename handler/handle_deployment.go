@@ -10,10 +10,10 @@ import (
 
 // HandleDeployment applies `Kind: Deployment`
 func (h *Handler) HandleDeployment(cmd *cobra.Command, args []string) {
-	// Set Namespace
-	namespace := setNamespace(cmd.Flag("namespace").Value.String())
 	// Handle kubeconfig file
 	kubeconfig := h.newKubeConfigHandler(cmd.Flag("kubeconfig").Value.String())
+	// Set Namespace
+	namespace := setNamespace(cmd.Flag("namespace").Value.String())
 	// Set Deployment Client
 	deploymentsClient := kubeconfig.Clientset.AppsV1().Deployments(namespace)
 	// Decode deployment file
