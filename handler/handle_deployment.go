@@ -53,6 +53,7 @@ func (h *Handler) HandleDeployment(cmd *cobra.Command, args []string) {
 		if c.SecurityContext == nil {
 			v1sc := v1.SecurityContext{
 				RunAsNonRoot:           setTrue(),
+				RunAsUser:              ptrInt64(1001),
 				ReadOnlyRootFilesystem: setTrue(),
 			}
 			c.SecurityContext = &v1sc

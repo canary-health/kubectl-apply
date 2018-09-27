@@ -25,3 +25,8 @@ func ptrInt32(i int) *int32 {
 	i32 := int32(i)
 	return &i32
 }
+
+func ptrInt64(i int) *int64 {
+	i64 := int64(i)
+	return &i64
+}
