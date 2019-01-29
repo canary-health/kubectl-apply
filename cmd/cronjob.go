@@ -28,4 +28,8 @@ var cronjobCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(cronjobCmd)
+
+	cronjobCmd.Flags().StringP("paramPath", "p", "", "Path to namespace params (e.g. /development/service)")
+
+	cronjobCmd.Flags().StringP("image", "i", "", "Name of image to deploy")
 }
